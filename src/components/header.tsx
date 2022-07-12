@@ -10,6 +10,7 @@ const StyledHeader = styled.header`
   background-color: #434343;
   padding: 15px;
   color: white;
+  font-size: 40px;
 `;
 
 const Spacer = styled.span`
@@ -26,7 +27,8 @@ const HeaderButton = styled.button<{
   overflow: hidden;
   outline: none;
   color: white;
-  line-height: 20px;
+  line-height: 40px;
+  font-size: 40px;
   ${(props) =>
     props.active &&
     css`

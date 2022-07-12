@@ -5,6 +5,7 @@ import { NumpadComponent } from 'containers/numpadComponent';
 import { expressionCalculator } from 'utils/calculator';
 import { addToHistory, clearHistory } from 'redux/historySlice';
 import { useAppDispatch } from 'redux/hooks';
+import { PageLayout } from 'layouts';
 
 export function MainPage() {
   const [inputString, setInputString] = useState('');
@@ -58,12 +59,12 @@ export function MainPage() {
   }
 
   return (
-    <React.Fragment>
+    <PageLayout>
       <div className="left">
         <DisplayComponent input={inputString} />
         <NumpadComponent handleClick={handleClick} />
       </div>
       <HistoryComponent />
-    </React.Fragment>
+    </PageLayout>
   );
 }

@@ -7,7 +7,7 @@ const GridContainer = styled.div`
   grid-template-columns: repeat(5, auto);
   grid-template-rows: repeat(4, auto);
   grid-row-gap: 20px;
-  grid-column-gap: 10px;
+  grid-column-gap: 40px;
   max-width: 800px;
 `;
 
