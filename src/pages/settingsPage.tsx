@@ -1,5 +1,7 @@
 import { Themes } from 'constants/constants';
 import { useState } from 'react';
+import { clearHistory } from 'redux/historySlice';
+import { useAppDispatch } from 'redux/hooks';
 import styled from 'styled-components';
 
 const SettingsContainer = styled.div`
@@ -79,12 +81,19 @@ const options = [Themes.LIGHT, Themes.DARK];
 export function SettingsPage(props: any) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(Themes.LIGHT);
+  const dispatch = useAppDispatch();
+
   const toggling = () => setIsOpen(!isOpen);
 
   const onOptionClicked = (value: Themes) => () => {
     setSelectedOption(value);
     setIsOpen(false);
     //TODO send to parent
+  };
+
+  const clear = () => () => {
+    alert('History cleared!');
+    dispatch(clearHistory());
   };
 
   return (
@@ -108,7 +117,7 @@ export function SettingsPage(props: any) {
           </DropDownListContainer>
         )}
       </DropDownContainer>
-      <SettingsStyledButton>Clear All History</SettingsStyledButton>
+      <SettingsStyledButton onClick={clear()}>Clear All History</SettingsStyledButton>
     </SettingsContainer>
   );
 }

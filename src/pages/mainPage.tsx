@@ -21,10 +21,6 @@ export function MainPage() {
     }
   }
 
-  function clear(): void {
-    dispatch(clearHistory());
-  }
-
   function handleClick(buttonPressed: string): void {
     const lastChar = inputString.toString().charAt(inputString.length - 1);
 
