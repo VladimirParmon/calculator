@@ -47,7 +47,7 @@ export function MainPage() {
         break;
       case '<=':
         setInputString((lastValue) => {
-          return lastValue.slice(0, -1);
+          return lastValue.toString().slice(0, -1);
         });
         break;
       default:
