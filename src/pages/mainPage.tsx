@@ -3,7 +3,7 @@ import { DisplayComponent } from 'components/display';
 import { HistoryComponent } from 'components/history';
 import { NumpadComponent } from 'containers/numpadComponent';
 import { expressionCalculator } from 'utils/calculator';
-import { addToHistory, clearHistory } from 'redux/historySlice';
+import { addToHistory } from 'redux/historySlice';
 import { useAppDispatch } from 'redux/hooks';
 import { PageLayout } from 'layouts';
 
@@ -14,8 +14,10 @@ export function MainPage() {
   function calculate(): void {
     try {
       const result = expressionCalculator(inputString);
-      dispatch(addToHistory(inputString));
-      if (result) setInputString(result);
+      if (result) {
+        dispatch(addToHistory(inputString));
+        setInputString(result);
+      }
     } catch (err: any) {
       alert(err);
     }

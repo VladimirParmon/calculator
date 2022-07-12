@@ -8,11 +8,18 @@ export function expressionCalculator(expr: string): string | void {
   if (illegalChars) throw new Error('Invalid input');
 
   if (exprWithoutSpaces.indexOf('/0') !== -1) throw new Error('Division by zero');
+
   const areParenthesesValid = validateParentheses(exprWithoutSpaces);
   if (!areParenthesesValid) throw new Error('Brackets must be paired');
 
-  const generator = new Function('return ' + exprWithoutSpaces);
-  const result = generator().toFixed(3);
+  let result = null;
+
+  try {
+    const generator = new Function('return ' + exprWithoutSpaces);
+    result = Number(generator().toFixed(3)).toString();
+  } catch {
+    throw new Error('Invalid input');
+  }
   return result;
 }
 
