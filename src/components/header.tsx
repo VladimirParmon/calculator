@@ -1,6 +1,5 @@
 import { RouterPaths } from 'constants/constants';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 const StyledHeader = styled.header`
@@ -44,7 +43,8 @@ const HeaderButton = styled.button<{
 `;
 
 function Header() {
-  const [currentPage, setCurrentPage] = useState(RouterPaths.MAIN);
+  let currentPage = useLocation().pathname.replace('/', '');
+
   return (
     <StyledHeader>
       <span>Calculator App</span>
@@ -53,7 +53,7 @@ function Header() {
         <Link to={RouterPaths.MAIN}>
           <HeaderButton
             active={currentPage === RouterPaths.MAIN}
-            onClick={() => setCurrentPage(RouterPaths.MAIN)}
+            onClick={() => (currentPage = RouterPaths.MAIN)}
           >
             Home
           </HeaderButton>
@@ -61,7 +61,7 @@ function Header() {
         <Link to={RouterPaths.SETTINGS}>
           <HeaderButton
             active={currentPage === RouterPaths.SETTINGS}
-            onClick={() => setCurrentPage(RouterPaths.SETTINGS)}
+            onClick={() => (currentPage = RouterPaths.SETTINGS)}
           >
             Settings
           </HeaderButton>
