@@ -1,7 +1,6 @@
 import { NumpadButtonComponent } from 'components/numpadButton';
 import styled from 'styled-components';
 
-type HandleClick = (value: string) => void;
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(5, auto);
@@ -11,7 +10,7 @@ const GridContainer = styled.div`
   max-width: 800px;
 `;
 
-export function NumpadComponent(props: { handleClick: HandleClick }) {
+export function NumpadComponent(props: { handleClick: (value: string) => void }) {
   const buttons = [
     'C',
     '7',

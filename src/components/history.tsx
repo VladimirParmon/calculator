@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { RootState } from 'redux/store';
 import styled from 'styled-components';
 
 const StyledHistoryHeading = styled.h2`
@@ -25,7 +26,7 @@ const StyledHistorySpan = styled.span`
 `;
 
 export function HistoryComponent() {
-  const history = useSelector((state: any) => state.history.value);
+  const history = useSelector((state: RootState) => state.history.value);
   return (
     <StyledHistoryContainer>
       <StyledHistoryHeading>History</StyledHistoryHeading>

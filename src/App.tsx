@@ -6,6 +6,7 @@ import { SettingsPage } from 'pages/settingsPage';
 import { Page404 } from 'pages/page404';
 import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
+import { ErrorBoundary } from 'containers/errorBoundary';
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState(Themes.LIGHT);
@@ -20,20 +21,22 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={getTheme()}>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Navigate replace to={RouterPaths.MAIN} />} />
-          <Route path={RouterPaths.MAIN} element={<MainPage />} />
-          <Route
-            path={RouterPaths.SETTINGS}
-            element={<SettingsPage setTheme={setCurrentTheme} />}
-          />
-          <Route path={RouterPaths.WILDCARD} element={<Page404 />} />
-        </Routes>
-      </ThemeProvider>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <ThemeProvider theme={getTheme()}>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Navigate replace to={RouterPaths.MAIN} />} />
+            <Route path={RouterPaths.MAIN} element={<MainPage />} />
+            <Route
+              path={RouterPaths.SETTINGS}
+              element={<SettingsPage setTheme={setCurrentTheme} />}
+            />
+            <Route path={RouterPaths.WILDCARD} element={<Page404 />} />
+          </Routes>
+        </ThemeProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 

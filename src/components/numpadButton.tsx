@@ -20,7 +20,10 @@ const ButtonSpan = styled.span`
   user-select: none;
 `;
 
-export function NumpadButtonComponent(props: { label: string; handleClick: any }) {
+export function NumpadButtonComponent(props: {
+  label: string;
+  handleClick: (label: string) => void;
+}) {
   return (
     <StyledNumpadButton style={{ fontSize: '30px' }} onClick={() => props.handleClick(props.label)}>
       <ButtonSpan>{props.label}</ButtonSpan>

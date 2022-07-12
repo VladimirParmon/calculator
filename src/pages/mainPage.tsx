@@ -18,7 +18,7 @@ export function MainPage() {
         dispatch(addToHistory(inputString));
         setInputString(result);
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       alert(err);
     }
   }
