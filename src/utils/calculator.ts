@@ -4,7 +4,7 @@ export function expressionCalculator(expr: string): string | void {
   const operations = exprWithoutSpaces.match(/[-+/*%]/g);
   if (!operations) return;
 
-  const illegalChars = exprWithoutSpaces.match(/[^(0-9-+/*%)]/g);
+  const illegalChars = exprWithoutSpaces.match(/[^(0-9-+/*%).]/g);
   if (illegalChars) throw new Error('Invalid input');
 
   if (exprWithoutSpaces.indexOf('/0') !== -1) throw new Error('Division by zero');
@@ -12,7 +12,8 @@ export function expressionCalculator(expr: string): string | void {
   if (!areParenthesesValid) throw new Error('Brackets must be paired');
 
   const generator = new Function('return ' + exprWithoutSpaces);
-  return generator();
+  const result = generator().toFixed(3);
+  return result;
 }
 
 function validateParentheses(expr: string): boolean {
