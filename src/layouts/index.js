@@ -7,4 +7,5 @@ export const PageLayout = styled.div`
   display: flex;
   padding: 20px;
   gap: 15px;
+  background-color: ${(props) => props.theme.primary};
 `;

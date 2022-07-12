@@ -10,21 +10,26 @@ const SettingsContainer = styled.div`
   padding: 50px;
   display: flex;
   flex-direction: column;
+  background-color: ${(props) => props.theme.primary};
 `;
 
 const SettingsStyledButton = styled.button`
-  background-color: lightgrey;
-  border: 1px solid black;
+  background-color: ${(props) => props.theme.secondary};
+  border: 1px solid ${(props) => props.theme.accent};
+  color: ${(props) => props.theme.accent};
   cursor: pointer;
   overflow: hidden;
   outline: none;
-  color: black;
   line-height: 20px;
   font-size: 20px;
   border-radius: 6px;
   width: 250px;
   padding: 20px;
   text-align: left;
+`;
+
+const SettingsStyledHeading = styled.h1`
+  color: ${(props) => props.theme.fontColor};
 `;
 
 const DropDownContainer = styled.div`
@@ -36,12 +41,18 @@ const DropDownHeader = styled.div`
   padding: 20px;
   line-height: 20px;
   font-size: 20px;
-  background-color: white;
-  border: 1px solid black;
+  background-color: ${(props) => props.theme.primary};
+  border: 1px solid ${(props) => props.theme.accent};
+  color: ${(props) => props.theme.fontColor};
   border-radius: 6px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+
+  span {
+    user-select: none;
+  }
 `;
 
 const DropDownListContainer = styled.div``;
@@ -49,13 +60,13 @@ const DropDownListContainer = styled.div``;
 const DropDownList = styled.ul`
   padding: 0;
   margin: 0 0 15px 0;
-  background: #ffffff;
-  border: 2px solid #e5e5e5;
-  color: black;
+  background-color: ${(props) => props.theme.primary};
+  border: 2px solid ${(props) => props.theme.accent};
+  color: ${(props) => props.theme.fontColor};
   font-size: 1.3rem;
   border-radius: 6px;
   & li:not(:last-of-type) {
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid ${(props) => props.theme.accent};
   }
 `;
 
@@ -78,7 +89,7 @@ const Icon = styled.span`
 
 const options = [Themes.LIGHT, Themes.DARK];
 
-export function SettingsPage(props: any) {
+export function SettingsPage(props: { setTheme: React.Dispatch<React.SetStateAction<Themes>> }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(Themes.LIGHT);
   const dispatch = useAppDispatch();
@@ -88,7 +99,7 @@ export function SettingsPage(props: any) {
   const onOptionClicked = (value: Themes) => () => {
     setSelectedOption(value);
     setIsOpen(false);
-    //TODO send to parent
+    props.setTheme(value);
   };
 
   const clear = () => () => {
@@ -98,7 +109,7 @@ export function SettingsPage(props: any) {
 
   return (
     <SettingsContainer>
-      <h1>Settings page</h1>
+      <SettingsStyledHeading>Settings page</SettingsStyledHeading>
       <DropDownContainer>
         <DropDownHeader onClick={toggling}>
           <span>{selectedOption}</span>
