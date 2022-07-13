@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { DisplayComponent } from 'components/display';
-import { HistoryComponent } from 'components/history';
+import { DisplayComponent } from 'components/display/display';
+import { HistoryComponent } from 'components/history/history';
 import { NumpadComponent } from 'containers/numpadComponent';
 import { expressionCalculator } from 'utils/calculator';
 import { addToHistory } from 'redux/historySlice';

@@ -1,4 +1,5 @@
-import { NumpadButtonComponent } from 'components/numpadButton';
+import { NumpadButtonComponent } from 'components/numpadButton/numpadButton';
+import { buttons } from 'constants/constants';
 import styled from 'styled-components';
 
 const GridContainer = styled.div`
@@ -11,30 +12,6 @@ const GridContainer = styled.div`
 `;
 
 export function NumpadComponent(props: { handleClick: (value: string) => void }) {
-  const buttons = [
-    'C',
-    '7',
-    '8',
-    '9',
-    '*',
-    '-',
-    '4',
-    '5',
-    '6',
-    '/',
-    '+',
-    '1',
-    '2',
-    '3',
-    '%',
-    '.',
-    '(',
-    '0',
-    ')',
-    '=',
-    '<='
-  ];
-
   return (
     <GridContainer>
       {buttons.map((button) => (

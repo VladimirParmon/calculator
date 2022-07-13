@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledHeading = styled.h2`
+export const StyledHeading = styled.h2`
   font-size: 50px;
   line-height: 50px;
   text-align: right;
@@ -14,7 +14,3 @@ const StyledHeading = styled.h2`
     text-decoration: underline;
   }
 `;
-
-export function DisplayComponent({ input }: { input: string }) {
-  return <StyledHeading>{input === '' ? '0' : input}</StyledHeading>;
-}
