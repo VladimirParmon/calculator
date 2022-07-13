@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["express"],
+    "types": ["cypress"],
     "baseUrl": "src",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

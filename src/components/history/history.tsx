@@ -10,7 +10,7 @@ import {
 export function HistoryComponent() {
   const history = useSelector((state: RootState) => state.history.value);
   return (
-    <StyledHistoryContainer className="history">
+    <StyledHistoryContainer data-cy="history" className="history">
       <StyledHistoryHeading>History</StyledHistoryHeading>
       {history.length ? (
         history.map((line: string) => <StyledHistorySpan key={line}>{line}</StyledHistorySpan>)

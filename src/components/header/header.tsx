@@ -6,7 +6,7 @@ function Header() {
   let currentPage = useLocation().pathname.replace('/', '');
 
   return (
-    <StyledHeader>
+    <StyledHeader data-cy="header">
       <HeaderLogoSpan>Calculator App</HeaderLogoSpan>
       <Spacer></Spacer>
       <div>

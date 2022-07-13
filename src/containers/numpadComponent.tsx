@@ -21,7 +21,7 @@ const GridContainer = styled.div`
 
 export function NumpadComponent(props: { handleClick: (value: string) => void }) {
   return (
-    <GridContainer>
+    <GridContainer data-cy="numpad">
       {buttons.map((button) => (
         <NumpadButtonComponent label={button} key={button} handleClick={props.handleClick} />
       ))}

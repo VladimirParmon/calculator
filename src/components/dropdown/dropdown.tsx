@@ -26,7 +26,7 @@ export function DropdownComponent<T extends string>(props: {
   };
   return (
     <DropDownContainer>
-      <DropDownHeader onClick={toggling}>
+      <DropDownHeader onClick={toggling} data-cy="select">
         <span>{selectedOption}</span>
         <Spacer></Spacer>
         <Icon>{isOpen ? '⏶' : '⏷'}</Icon>

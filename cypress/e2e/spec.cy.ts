@@ -1,43 +1,68 @@
-import { expressionCalculator } from '../../src/utils/calculator';
+/// <reference types="cypress" />
+import { darkTheme, lightTheme } from '../../src/constants/constants';
+import { hexToRgb } from '../../src/utils/colorConverter';
 
-describe('Unit test our math functions', () => {
+describe('app is launched and working', () => {
+  it('opens the main page', () => {
+    cy.visit('http://localhost:3000/');
+    cy.get('[data-cy="header"]');
+    cy.get('[data-cy="display"]');
+    cy.get('[data-cy="numpad"]');
+    cy.get('[data-cy="history"]');
+    cy.url().should('include', '/main');
+    cy.get('.layout').should('have.css', 'background-color', hexToRgb(lightTheme.primary));
+  });
+
+  it('can open settings and change theme', () => {
+    cy.contains('Settings').click();
+    cy.url().should('include', '/settings');
+
+    cy.get('[data-cy="select"]').click();
+    cy.contains('Dark theme').click();
+
+    cy.contains('Home').click();
+    cy.get('.layout').should('have.css', 'background-color', hexToRgb(darkTheme.primary));
+  });
+});
+
+describe('calculator functionality', () => {
   context('this should be ok as it is', () => {
     it('can add numbers', () => {
-      expect(expressionCalculator('1 + 2')).to.eq('3');
+      cy.contains('1').click();
+      cy.contains('+').click();
+      cy.contains('2').click();
+      cy.contains('=').click();
+      cy.get('[data-cy="display"]').should((element) => {
+        expect(element).to.contain('3');
+      });
     });
 
-    it('can subtract numbers', () => {
-      expect(expressionCalculator('1 - 3')).to.eq('-2');
-    });
-
-    it('can divide numbers', () => {
-      expect(expressionCalculator('27 / 9')).to.eq('3');
-    });
-
-    it('can multiply numbers', () => {
-      expect(expressionCalculator('5 * 4')).to.eq('20');
-    });
-
-    it('can deal with simple parenthesis', () => {
-      expect(expressionCalculator('29 + (34 - 20)')).to.eq('43');
-    });
-
-    it('can deal with nested parenthesis', () => {
-      expect(expressionCalculator('29 + (34 - (20 + 4))')).to.eq('39');
-    });
-
-    it('can deal with remainder', () => {
-      expect(expressionCalculator('-13 % 5')).to.eq('-3');
+    it('displays history', () => {
+      cy.get('[data-cy="history"]')
+        .children('span')
+        .should('have.length', 1)
+        .eq(0)
+        .should((span) => {
+          expect(span).to.contain('1+2');
+        });
     });
   });
-  // context('this should throw', () => {
-  //   it('throws on invalid syntax', () => {
-  //     expressionCalculator('6*');
-  //     cy.on('uncaught:exception', (err, runnable) => {
-  //       if (err.message.includes('Invalid input')) {
-  //         return true;
-  //       }
-  //     });
-  //   });
-  // });
+  //TODO: context('Bad input should invoke alert with an error
+  //TODO: message "Invalid input"', () => { "6*" or "2-)" or "4/0" })
+});
+
+describe('Delete history functionality', () => {
+  it('can delete history', () => {
+    cy.contains('Settings').click();
+    cy.contains('Clear All History').click();
+
+    cy.contains('Home').click();
+    cy.get('[data-cy="history"]')
+      .children('span')
+      .should('have.length', 1)
+      .eq(0)
+      .should((span) => {
+        expect(span).to.contain('Nothing to show yet');
+      });
+  });
 });
