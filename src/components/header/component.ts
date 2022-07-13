@@ -40,4 +40,10 @@ const HeaderButton = styled.button<{
     `}
 `;
 
-export { StyledHeader, Spacer, HeaderButton };
+const HeaderLogoSpan = styled.span`
+  @media screen and (max-width: ${(props) => props.theme.media.headerChange}) {
+    display: none;
+  }
+`;
+
+export { StyledHeader, Spacer, HeaderButton, HeaderLogoSpan };

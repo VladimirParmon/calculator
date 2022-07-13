@@ -9,6 +9,14 @@ const GridContainer = styled.div`
   grid-row-gap: 20px;
   grid-column-gap: 40px;
   max-width: 800px;
+  justify-content: center;
+  justify-items: center;
+
+  @media screen and (max-width: ${(props) => props.theme.media.buttonsChange}) {
+    grid-row-gap: 5px;
+    grid-column-gap: 10px;
+    max-width: none;
+  }
 `;
 
 export function NumpadComponent(props: { handleClick: (value: string) => void }) {

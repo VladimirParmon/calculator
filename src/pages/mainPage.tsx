@@ -57,7 +57,7 @@ export function MainPage() {
   }
 
   return (
-    <PageLayout>
+    <PageLayout className="layout">
       <div className="left">
         <DisplayComponent input={inputString} />
         <NumpadComponent handleClick={handleClick} />

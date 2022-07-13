@@ -1,13 +1,13 @@
 import { RouterPaths } from 'constants/constants';
 import { Link, useLocation } from 'react-router-dom';
-import { StyledHeader, Spacer, HeaderButton } from './component';
+import { StyledHeader, Spacer, HeaderButton, HeaderLogoSpan } from './component';
 
 function Header() {
   let currentPage = useLocation().pathname.replace('/', '');
 
   return (
     <StyledHeader>
-      <span>Calculator App</span>
+      <HeaderLogoSpan>Calculator App</HeaderLogoSpan>
       <Spacer></Spacer>
       <div>
         <Link to={RouterPaths.MAIN}>

@@ -14,6 +14,11 @@ const StyledNumpadButton = styled.div`
   &:hover {
     filter: brightness(70%);
   }
+
+  @media screen and (max-width: ${(props) => props.theme.media.buttonsChange}) {
+    width: 15vw;
+    height: 15vw;
+  }
 `;
 
 const ButtonSpan = styled.span`

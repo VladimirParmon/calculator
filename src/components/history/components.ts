@@ -7,13 +7,22 @@ const StyledHistoryHeading = styled.h2`
   color: ${(props) => props.theme.fontColor};
 `;
 
+const MessageOnEmpty = styled.span`
+  text-align: center;
+  color: ${(props) => props.theme.fontColor};
+`;
+
 const StyledHistoryContainer = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   border-left: 2px solid ${(props) => props.theme.accent};
+
+  @media screen and (max-width: ${(props) => props.theme.media.toColumn}) {
+    overflow-y: visible;
+    min-height: 500px;
+  }
 `;
 
 const StyledHistorySpan = styled.span`
@@ -23,4 +32,4 @@ const StyledHistorySpan = styled.span`
   color: ${(props) => props.theme.fontColor};
 `;
 
-export { StyledHistoryHeading, StyledHistoryContainer, StyledHistorySpan };
+export { StyledHistoryHeading, StyledHistoryContainer, StyledHistorySpan, MessageOnEmpty };

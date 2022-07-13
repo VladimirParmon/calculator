@@ -9,18 +9,26 @@ export enum Themes {
   DARK = 'Dark theme'
 }
 
+const mediaThresholds = {
+  toColumn: '1200px',
+  buttonsChange: '700px',
+  headerChange: '600px'
+};
+
 export const lightTheme = {
   primary: '#ffffff',
   secondary: '#e5e5e5',
   accent: '#36454F',
-  fontColor: '#000000'
+  fontColor: '#000000',
+  media: mediaThresholds
 };
 
 export const darkTheme = {
   primary: '#808080',
   secondary: '#d3d3d3',
   accent: '#36454F',
-  fontColor: '#ffffff'
+  fontColor: '#ffffff',
+  media: mediaThresholds
 };
 
 export const buttons = [
