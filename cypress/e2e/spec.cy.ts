@@ -10,7 +10,11 @@ describe('app is launched and working', () => {
     cy.get('[data-cy="numpad"]');
     cy.get('[data-cy="history"]');
     cy.url().should('include', '/main');
-    cy.get('.layout').should('have.css', 'background-color', hexToRgb(lightTheme.primary));
+    cy.get('[data-cy="main-page-layout"]').should(
+      'have.css',
+      'background-color',
+      hexToRgb(lightTheme.primary)
+    );
   });
 
   it('can open settings and change theme', () => {
@@ -21,7 +25,11 @@ describe('app is launched and working', () => {
     cy.contains('Dark theme').click();
 
     cy.contains('Home').click();
-    cy.get('.layout').should('have.css', 'background-color', hexToRgb(darkTheme.primary));
+    cy.get('[data-cy="main-page-layout"]').should(
+      'have.css',
+      'background-color',
+      hexToRgb(darkTheme.primary)
+    );
   });
 });
 

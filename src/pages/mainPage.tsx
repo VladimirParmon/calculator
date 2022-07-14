@@ -11,7 +11,7 @@ export function MainPage() {
   const [inputString, setInputString] = useState('');
   const dispatch = useAppDispatch();
 
-  function calculate(): void {
+  function calculateAndSave(): void {
     try {
       const result = expressionCalculator(inputString);
       if (result) {
@@ -25,21 +25,19 @@ export function MainPage() {
 
   function handleClick(buttonPressed: string): void {
     const lastChar = inputString.toString().charAt(inputString.length - 1);
+    const isItOperatorChange =
+      lastChar && lastChar.match(/[-+/*%]/g) && buttonPressed.match(/[-+/*%]/g);
 
-    if (lastChar && lastChar.match(/[-+/*%]/g) && buttonPressed.match(/[-+/*%]/g)) {
-      if (buttonPressed === lastChar) {
-        return;
-      } else {
-        setInputString((lastValue) => {
-          return lastValue.slice(0, -1) + buttonPressed;
-        });
-        return;
-      }
+    if (isItOperatorChange) {
+      changeOperator();
+      return;
     }
+
+    if (lastChar === '.' && buttonPressed === '.') return;
 
     switch (buttonPressed) {
       case '=':
-        calculate();
+        calculateAndSave();
         break;
       case 'C':
         setInputString('');
@@ -54,11 +52,22 @@ export function MainPage() {
           return prevState + buttonPressed;
         });
     }
+
+    function changeOperator(): string | void {
+      if (buttonPressed === lastChar) {
+        return;
+      } else {
+        setInputString((lastValue) => {
+          return lastValue.slice(0, -1) + buttonPressed;
+        });
+        return;
+      }
+    }
   }
 
   return (
-    <PageLayout className="layout">
-      <div className="left">
+    <PageLayout className="main-page__layout-container" data-cy="main-page-layout">
+      <div className="main-page__section_left">
         <DisplayComponent input={inputString} />
         <NumpadComponent handleClick={handleClick} />
       </div>
