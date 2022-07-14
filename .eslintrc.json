@@ -21,7 +21,8 @@
   "plugins": ["react", "@typescript-eslint", "cypress"],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "jest/expect-expect": "off"
+    "jest/expect-expect": "off",
+    "react/prop-types": "off"
   },
   "settings": {
     "react": {

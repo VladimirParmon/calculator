@@ -1,7 +1,10 @@
 import DropdownComponent from 'components/dropdown';
 import { Themes } from 'constants/constants';
+import React from 'react';
+import { connect } from 'react-redux';
 import { clearHistory } from 'redux/historySlice';
-import { useAppDispatch } from 'redux/hooks';
+//import { useAppDispatch } from 'redux/hooks';
+import { AppDispatch } from 'redux/store';
 import styled from 'styled-components';
 
 const SettingsContainer = styled.div`
@@ -32,24 +35,48 @@ const SettingsStyledHeading = styled.h1`
   color: ${(props) => props.theme.fontColor};
 `;
 
-export function SettingsPage(props: { setTheme: React.Dispatch<React.SetStateAction<Themes>> }) {
-  const options = [Themes.LIGHT, Themes.DARK];
-  const dispatch = useAppDispatch();
+// export function SettingsPage(props: { setTheme: React.Dispatch<React.SetStateAction<Themes>> }) {
+//   const options = [Themes.LIGHT, Themes.DARK];
+//   const dispatch = useAppDispatch();
 
-  const clear = () => () => {
+//   const clear = () => () => {
+//     alert('History cleared!');
+//     dispatch(clearHistory());
+//   };
+
+//   const choiceHandler = (value: Themes) => {
+//     props.setTheme(value);
+//   };
+
+//   return (
+//     <SettingsContainer>
+//       <SettingsStyledHeading>Settings page</SettingsStyledHeading>
+//       <DropdownComponent options={options} choiceHandler={choiceHandler} />
+//       <SettingsStyledButton onClick={clear()}>Clear All History</SettingsStyledButton>
+//     </SettingsContainer>
+//   );
+// }
+class SettingsPage extends React.Component<{
+  dispatch: AppDispatch;
+  setTheme: (theme: Themes) => void;
+}> {
+  options = [Themes.LIGHT, Themes.DARK];
+  choiceHandler = (value: Themes) => {
+    this.props.setTheme(value);
+  };
+  clear = () => () => {
     alert('History cleared!');
-    dispatch(clearHistory());
+    this.props.dispatch(clearHistory());
   };
-
-  const choiceHandler = (value: Themes) => {
-    props.setTheme(value);
-  };
-
-  return (
-    <SettingsContainer>
-      <SettingsStyledHeading>Settings page</SettingsStyledHeading>
-      <DropdownComponent options={options} choiceHandler={choiceHandler} />
-      <SettingsStyledButton onClick={clear()}>Clear All History</SettingsStyledButton>
-    </SettingsContainer>
-  );
+  render() {
+    return (
+      <SettingsContainer>
+        <SettingsStyledHeading>Settings page</SettingsStyledHeading>
+        <DropdownComponent options={this.options} choiceHandler={this.choiceHandler} />
+        <SettingsStyledButton onClick={this.clear()}>Clear All History</SettingsStyledButton>
+      </SettingsContainer>
+    );
+  }
 }
+
+export default connect()(SettingsPage);

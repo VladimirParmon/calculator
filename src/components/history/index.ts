@@ -1,2 +1,2 @@
-import { HistoryComponent } from './history';
+import HistoryComponent from './history';
 export default HistoryComponent;

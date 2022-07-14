@@ -1,5 +1,6 @@
 import { NumpadButtonComponent } from 'components/numpadButton/numpadButton';
 import { buttons } from 'constants/constants';
+import React from 'react';
 import styled from 'styled-components';
 
 const GridContainer = styled.div`
@@ -19,12 +20,24 @@ const GridContainer = styled.div`
   }
 `;
 
-export function NumpadComponent(props: { handleClick: (value: string) => void }) {
-  return (
-    <GridContainer data-cy="numpad">
-      {buttons.map((button) => (
-        <NumpadButtonComponent label={button} key={button} handleClick={props.handleClick} />
-      ))}
-    </GridContainer>
-  );
+// export function NumpadComponent(props: { handleClick: (value: string) => void }) {
+//   return (
+//     <GridContainer data-cy="numpad">
+//       {buttons.map((button) => (
+//         <NumpadButtonComponent label={button} key={button} handleClick={props.handleClick} />
+//       ))}
+//     </GridContainer>
+//   );
+// }
+
+export class NumpadComponent extends React.Component<{ handleClick: (value: string) => void }> {
+  render() {
+    return (
+      <GridContainer data-cy="numpad">
+        {buttons.map((button) => (
+          <NumpadButtonComponent label={button} key={button} handleClick={this.props.handleClick} />
+        ))}
+      </GridContainer>
+    );
+  }
 }
