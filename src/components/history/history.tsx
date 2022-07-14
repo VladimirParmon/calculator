@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux';
 import { selectHistory } from 'redux/historySlice';
+import { useAppSelector } from 'redux/hooks';
 import {
   StyledHistoryHeading,
   StyledHistoryContainer,
@@ -8,7 +8,7 @@ import {
 } from './components';
 
 export function HistoryComponent() {
-  const history = useSelector(selectHistory);
+  const history = useAppSelector(selectHistory);
   return (
     <StyledHistoryContainer data-cy="history" className="history">
       <StyledHistoryHeading>History</StyledHistoryHeading>
